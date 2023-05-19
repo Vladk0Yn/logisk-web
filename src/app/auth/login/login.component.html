@@ -1,0 +1,40 @@
+<div class="login-page">
+  <div class="box-wrapper">
+    <div class="d-flex justify-content-center align-items-center">
+      <mat-card>
+        <mat-card-content>
+          <h1 style="font-weight: bolder; font-size: xx-large;">Welcome back to Logisk</h1>
+          <br>
+          <form [formGroup]="loginForm">
+
+            <mat-label style="font-size: large;" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Login (email)
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput tabindex="1" placeholder="example@example.com" [email]="true" formControlName="username"/>
+            </mat-form-field>
+
+            <mat-label style="font-size: large;" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Password
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput tabindex="2" [type]="hide ? 'password' : 'text'" formControlName="password"/>
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <button tabindex="3" type="submit" (click)="submit()" [disabled]="loginForm.invalid" mat-flat-button
+                    color="primary" class="w-100" style="font-size: large; height: 48px;">Sign In
+            </button>
+          </form>
+          <span class="d-block mt-3 f-w-500 m-t-24">
+            New to Logisk?
+            <a [routerLink]="['/registration']" style="color: #009688; font-size: medium">Create an account</a>
+          </span>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+

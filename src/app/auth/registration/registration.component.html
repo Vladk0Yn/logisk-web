@@ -1,0 +1,53 @@
+<div class="register-page">
+  <div class="box-wrapper">
+    <div class="d-flex justify-content-center align-items-center">
+      <mat-card>
+        <mat-card-content>
+
+          <h1 style="font-weight: bolder; font-size: xx-large;">Create your account</h1>
+
+          <form [formGroup]="registerForm">
+
+            <mat-label style="font-size: large;" class="d-block">Full name</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput tabindex="1" placeholder="John Doe" formControlName="fullname"/>
+            </mat-form-field>
+
+            <mat-label style="font-size: large;" class="d-block">Login (email)</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput tabindex="2" placeholder="example@example.com" [email]="true" formControlName="username"/>
+            </mat-form-field>
+
+            <mat-label style="font-size: large;" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Password</mat-label>
+            <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput tabindex="3" [type]="hide ? 'password' : 'text'" formControlName="password"/>
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <mat-button-toggle-group class="w-100" [(ngModel)]="role" [ngModelOptions]="{standalone: true}"
+                                     (change)="onToggleChange($event)">
+              <mat-button-toggle class="w-50 mat-primary" style="font-size: large;" checked [value]="'client'">I am client</mat-button-toggle>
+              <mat-button-toggle class="w-50 mat-primary" style="font-size: large;" [value]="'driver'">I am driver</mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <button tabindex="4" type="submit" (click)="submit()" [disabled]="registerForm.invalid" mat-flat-button
+                    color="primary" class="w-100 mt-3" style="font-size: large; height: 48px;">Sign Up
+            </button>
+
+          </form>
+
+          <span class="d-block mt-3 f-w-500 text-center m-t-24">
+            Have an account?
+            <a [routerLink]="['/login']" style="color: #009688; font-size: medium">Login</a>
+          </span>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+

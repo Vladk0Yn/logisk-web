@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$logisk-web-primary: mat.define-palette(mat.$indigo-palette);
+$logisk-web-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$logisk-web-warn: mat.define-palette(mat.$red-palette);
+
+$logisk-web-theme: mat.define-light-theme((
+  color: (
+    primary: $logisk-web-primary,
+    accent: $logisk-web-accent,
+    warn: $logisk-web-warn,
+  )
+));
+
+@include mat.all-component-themes($logisk-web-theme);
+
+$my-primary: mat.define-palette(mat.$teal-palette, 500);
+$my-accent:  mat.define-palette(mat.$pink-palette);
+$my-warn:    mat.define-palette(mat.$deep-orange-palette);
+$my-theme: mat.define-light-theme($my-primary, $my-accent, $my-warn);
+
+@include angular-material-theme($my-theme);

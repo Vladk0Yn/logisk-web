@@ -17,6 +17,11 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { ClientHeaderComponent } from './client/client-header/client-header.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import { ClientOrdersComponent } from './client/client-orders/client-orders.component';
+import { ClientFooterComponent } from './client/client-footer/client-footer.component';
+import {MatChipsModule} from "@angular/material/chips";
+import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatBadgeModule} from "@angular/material/badge";
 
 @NgModule({
   declarations: [
@@ -24,7 +29,8 @@ import { ClientOrdersComponent } from './client/client-orders/client-orders.comp
     LoginComponent,
     RegistrationComponent,
     ClientHeaderComponent,
-    ClientOrdersComponent
+    ClientOrdersComponent,
+    ClientFooterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +45,11 @@ import { ClientOrdersComponent } from './client/client-orders/client-orders.comp
     MatCheckboxModule,
     ReactiveFormsModule,
     MatButtonToggleModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatChipsModule,
+    MatLegacyChipsModule,
+    MatProgressBarModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

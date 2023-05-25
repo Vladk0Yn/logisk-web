@@ -1,13 +1,26 @@
-<mat-toolbar class="p-4" style="min-height:72px;" color="primary">
+<mat-toolbar class="p-4" style="min-height: 72px;" color="primary">
   <button class="p-4" mat-button>
     <span style="font-weight: bolder; font-size: xx-large;">Logisk</span>
   </button>
-  <div style="flex-grow: 1; display: flex; justify-content: center;">
+  <div style="flex-grow: 1; display: flex; justify-content: end;">
     <div class="nav-buttons-group">
       <button mat-stroked-button class="p-4 m-3 nav-button">Orders</button>
       <button mat-stroked-button class="p-4 m-3 nav-button">Locations</button>
       <button mat-stroked-button class="p-4 m-3 nav-button">Account</button>
     </div>
   </div>
-  <button mat-icon-button><mat-icon>logout</mat-icon></button>
+  <div style="flex-grow: 1; display: flex; justify-content: center; align-items: center">
+    <div class="me-2">
+      Balance: {{userBalance}}$
+    </div>
+
+    <div>
+      <button mat-flat-button>
+        Top up
+      </button>
+    </div>
+  </div>
+  <div>
+    <button mat-icon-button (click)="logout()"><mat-icon>logout</mat-icon></button>
+  </div>
 </mat-toolbar>

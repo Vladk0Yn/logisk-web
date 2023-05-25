@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MatButtonToggleChange} from "@angular/material/button-toggle";
+import {AuthService} from "../../services/auth.service";
+import {NotificationService} from "../../services/notification.service";
+import {RegisterRequest} from "../../models/RegisterRequest";
 
 @Component({
   selector: 'app-registration',
@@ -9,19 +12,20 @@ import {MatButtonToggleChange} from "@angular/material/button-toggle";
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-
+  role = 'CLIENT'
   hide = true;
 
   registerForm: FormGroup = this.formBuilder.group({
-    fullname: ['', Validators.required],
-    username: ['', Validators.required],
-    password: ['', Validators.required]
+    name: [null, Validators.required],
+    phoneNumber: [null, [Validators.required, Validators.pattern('[- +()0-9]+')]],
+    email: [null, Validators.required],
+    password: [null, Validators.required]
   });
-
-  role: string = 'client';
 
   constructor (
     private router: Router,
+    private authService: AuthService,
+    private notificationService: NotificationService,
     private formBuilder: FormBuilder) {
   }
 
@@ -29,10 +33,18 @@ export class RegistrationComponent {
   }
 
   onToggleChange(event: MatButtonToggleChange) {
-    this.role = event.value;
+    this.role = event.value
   }
 
   submit(): void {
-    console.log(this.role)
+    let request: RegisterRequest = this.registerForm.value;
+    request.role = this.role;
+    this.authService.register(request).subscribe(data => {
+      console.log(request)
+      this.notificationService.showSnackBar("Success, you can login using your email and password");
+      this.router.navigate(['/login']);
+    }, error => {
+      this.notificationService.showSnackBar("Error, try again");
+    })
   }
 }

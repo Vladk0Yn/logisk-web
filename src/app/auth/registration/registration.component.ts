@@ -41,10 +41,10 @@ export class RegistrationComponent {
     request.role = this.role;
     this.authService.register(request).subscribe(data => {
       console.log(request)
-      this.notificationService.showSnackBar("Success, you can login using your email and password");
+      this.notificationService.showSnackBar("Успішно зареєстровано, можете увійти за допомогою логіну та паролю");
       this.router.navigate(['/login']);
     }, error => {
-      this.notificationService.showSnackBar("Error, try again");
+      this.notificationService.showSnackBar("Сталася помилка, спробуйте ще");
     })
   }
 }

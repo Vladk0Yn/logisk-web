@@ -1,34 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 *:not(mat-icon){
-  font-family: 'Urbanist', sans-serif !important;
+  font-family: 'Exo2', sans-serif !important;
 }
 
 @font-face {
-  font-family: 'Urbanist';
-  src: url("assets/fonts/urbanist/Urbanist-Regular.ttf");
+  font-family: 'Exo2';
+  src: url("assets/fonts/exo2/Exo2-Regular.ttf");
 }
 
 @font-face {
-  font-family: 'Urbanist-Bold';
-  src: url("assets/fonts/urbanist/Urbanist-Bold.ttf");
+  font-family: 'Exo2-Bold';
+  src: url("assets/fonts/exo2/Exo2-Bold.ttf");
 }
 
 @font-face {
-  font-family: 'Urbanist-Bold';
-  src: url("assets/fonts/urbanist/Urbanist-Bold.ttf");
+  font-family: 'Exo2-Medium';
+  src: url("assets/fonts/exo2/Exo2-Medium.ttf");
 }
 
 @font-face {
-  font-family: 'Urbanist-Medium';
-  src: url("assets/fonts/urbanist/Urbanist-Medium.ttf");
-}
-
-@font-face {
-  font-family: 'Urbanist-Thin';
-  src: url("assets/fonts/urbanist/Urbanist-Thin.ttf");
+  font-family: 'Exo2-Light';
+  src: url("assets/fonts/exo2/Exo2-Light.ttf");
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Exo2, "Helvetica Neue", sans-serif; }
 
 .mat-button-toggle.mat-button-toggle-checked {
   background-color: #009688;

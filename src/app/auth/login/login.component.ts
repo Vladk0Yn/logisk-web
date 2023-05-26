@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
       this.user = <User>JSON.parse(JSON.stringify(data));
       this.userStorageService.saveUser(this.user);
       this.user = this.userStorageService.getUser()
+      this.notificationService.showSnackBar("Вітаємо, " + this.user.name);
       if (this.user != null) {
         switch (this.user.role) {
           case "CLIENT": {
@@ -55,7 +56,7 @@ export class LoginComponent implements OnInit {
         }
       }
     }, error => {
-      this.notificationService.showSnackBar("Oops, wrong login or password :(")
+      this.notificationService.showSnackBar("Ой, невірний логін або пароль :(")
     });
   }
 }

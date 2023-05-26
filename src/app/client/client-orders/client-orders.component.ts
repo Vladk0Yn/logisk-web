@@ -21,7 +21,7 @@ export class ClientOrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.notificationService.showSnackBar("Hello, " + this.userStorageService.getUser().name);
+
   }
 
 }

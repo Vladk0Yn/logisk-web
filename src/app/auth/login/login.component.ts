@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {UserStorageService} from "../../services/user-storage.service";
-import {User} from "../../models/User";
+import {UserResponse} from "../../models/response/UserResponse";
 import {NotificationService} from "../../services/notification.service";
 
 @Component({
@@ -13,10 +13,10 @@ import {NotificationService} from "../../services/notification.service";
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  user: User;
+  user: UserResponse;
   public loginForm: FormGroup;
 
-  constructor (
+  constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -38,25 +38,28 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
-    this.authService.login(this.loginForm.value).subscribe(data => {
-      this.user = <User>JSON.parse(JSON.stringify(data));
-      this.userStorageService.saveUser(this.user);
-      this.user = this.userStorageService.getUser()
-      this.notificationService.showSnackBar("Вітаємо, " + this.user.name);
-      if (this.user != null) {
-        switch (this.user.role) {
-          case "CLIENT": {
-            this.router.navigate(['client/orders']);
-            break;
-          }
-          case "DRIVER": {
-            this.router.navigate(['driver/orders'])
-            break;
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (data) => {
+        this.user = <UserResponse>JSON.parse(JSON.stringify(data));
+        this.userStorageService.saveUser(this.user);
+        this.user = this.userStorageService.getUser()
+        this.notificationService.showSnackBar("Вітаємо, " + this.user.name);
+        if (this.user != null) {
+          this.userStorageService.saveToken(btoa(this.loginForm.value.login + ':' + this.loginForm.value.password));
+          switch (this.user.role) {
+            case "CLIENT": {
+              this.router.navigate(['client/orders']);
+              break;
+            }
+            case "DRIVER": {
+              this.router.navigate(['driver/orders'])
+              break;
+            }
           }
         }
+      }, error: (error) => {
+        this.notificationService.showSnackBar("Ой, невірний логін або пароль :(")
       }
-    }, error => {
-      this.notificationService.showSnackBar("Ой, невірний логін або пароль :(")
     });
   }
 }

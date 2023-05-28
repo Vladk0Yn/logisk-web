@@ -5,9 +5,15 @@
 
 .order-item {
   flex: 0 0 auto;
-  width: 100%;
-  max-width: 320px;
+  width: 340px;
   margin-bottom: 16px;
+}
+
+.single-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
 }
 
 .flex-wrapper {

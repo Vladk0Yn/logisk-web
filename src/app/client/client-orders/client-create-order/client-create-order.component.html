@@ -1,0 +1,90 @@
+<form [formGroup]="orderForm">
+  <h1 mat-dialog-title>Нове замовлення</h1>
+  <div mat-dialog-content style="width: 500px; overflow-y: hidden;">
+    <div class="justify-content-center">
+      <div class="mt-1">
+        <mat-form-field appearance="outline">
+          <mat-label>Назва</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+      </div>
+
+      <div style="display: flex; justify-content: space-between">
+        <div style="flex: 0 0 32%; max-width: 32%;">
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Вага, г.</mat-label>
+            <input matInput formControlName="weight">
+          </mat-form-field>
+        </div>
+
+        <div style="flex: 0 0 32%; max-width: 32%;">
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Ширина, см.</mat-label>
+            <input matInput formControlName="width">
+          </mat-form-field>
+        </div>
+
+        <div style="flex: 0 0 32%; max-width: 32%;">
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Висота, см.</mat-label>
+            <input matInput formControlName="height">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline" style="overflow: visible;">
+          <mat-label>Термін доставки, до:</mat-label>
+          <input style="overflow: visible;" matInput type="datetime-local" formControlName="deliverDueTime">
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Тип вантажу</mat-label>
+          <mat-select formControlName="type">
+            <mat-option value="MATERIALS">Матеріали</mat-option>
+            <mat-option value="PRODUCTS">Продукти</mat-option>
+            <mat-option value="FRAGILE">Крихкий вантаж</mat-option>
+            <mat-option value="DANGER">Небезпечний вантаж</mat-option>
+            <mat-option value="OTHER">Інше</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div style="display: flex; justify-content: space-between">
+        <div style="flex: 0 0 49%; max-width: 49%;">
+          <mat-form-field appearance="outline">
+            <mat-label>Доставити з</mat-label>
+            <mat-select formControlName="locationFromId" (selectionChange)="disableSelectedLocation($event.value)">
+              <mat-option *ngFor="let location of locations" [value]="location.id">{{location.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div style="flex: 0 0 49%; max-width: 49%;">
+          <mat-form-field appearance="outline">
+            <mat-label>Доставити до</mat-label>
+            <mat-select formControlName="locationToId" (selectionChange)="disableSelectedLocation($event.value)">
+              <mat-option *ngFor="let location of locations" [value]="location.id" [disabled]="location.id === selectedLocationFromId">{{location.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Оплата за доставку</mat-label>
+          <input matInput formControlName="deliveryPrice">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</form>
+<div style="display: flex; justify-content: right;" mat-dialog-actions>
+  <div>
+    <button mat-raised-button color="accent" mat-dialog-close>Закрити</button>
+    <button style="margin-left: 10px" [disabled]="orderForm.untouched" mat-raised-button color="primary"
+            (click)="createOrder()">Створити замовлення</button>
+  </div>
+</div>

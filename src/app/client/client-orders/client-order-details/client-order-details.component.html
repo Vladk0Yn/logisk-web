@@ -1,0 +1,115 @@
+<app-client-header></app-client-header>
+<div class="flex-wrapper">
+  <form *ngIf="order" [formGroup]="orderForm">
+    <div mat-dialog-content style="width: 500px; overflow-y: hidden;">
+      <div class="justify-content-center">
+        <h1>Доставка №{{orderId}}</h1>
+        <div class="mt-1">
+          <mat-form-field style="width: 100%" appearance="fill">
+            <mat-label>Назва</mat-label>
+            <input [readonly]="readonly" matInput formControlName="name">
+          </mat-form-field>
+        </div>
+
+        <div style="display: flex; justify-content: space-between">
+          <div style="flex: 0 0 32%; max-width: 32%;">
+            <mat-form-field appearance="fill" style="width: 100%;">
+              <mat-label>Вага, г.</mat-label>
+              <input [readonly]="readonly" matInput formControlName="weight">
+            </mat-form-field>
+          </div>
+
+          <div style="flex: 0 0 32%; max-width: 32%;">
+            <mat-form-field appearance="fill" style="width: 100%;">
+              <mat-label>Ширина, см.</mat-label>
+              <input [readonly]="readonly" matInput formControlName="width">
+            </mat-form-field>
+          </div>
+
+          <div style="flex: 0 0 32%; max-width: 32%;">
+            <mat-form-field appearance="fill" style="width: 100%;">
+              <mat-label>Висота, см.</mat-label>
+              <input [readonly]="readonly" matInput formControlName="height">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between">
+          <div style="flex: 0 0 49%; max-width: 49%;">
+            <mat-form-field appearance="fill" style="overflow: visible; width: 100%;" >
+              <mat-label>Замовлення створено:</mat-label>
+              <input readonly style="overflow: visible;" matInput type="datetime-local"
+                     formControlName="createdTime">
+            </mat-form-field>
+          </div>
+          <div style="flex: 0 0 49%; max-width: 49%;">
+            <mat-form-field appearance="fill" style="overflow: visible; width: 100%;">
+              <mat-label>Термін доставки, до:</mat-label>
+              <input [readonly]="readonly" style="overflow: visible;" matInput type="datetime-local"
+                     formControlName="deliverDueTime">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div>
+          <mat-form-field style="width: 100%;" appearance="fill">
+            <mat-label>Тип вантажу</mat-label>
+            <mat-select formControlName="type">
+              <mat-option [disabled]="readonly" value="MATERIALS">Матеріали</mat-option>
+              <mat-option [disabled]="readonly" value="PRODUCTS">Продукти</mat-option>
+              <mat-option [disabled]="readonly" value="FRAGILE">Крихкий вантаж</mat-option>
+              <mat-option [disabled]="readonly" value="DANGER">Небезпечний вантаж</mat-option>
+              <mat-option [disabled]="readonly" value="OTHER">Інше</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div style="display: flex; justify-content: space-between">
+          <div style="flex: 0 0 49%; max-width: 49%;">
+            <mat-form-field style="width: 100%;" appearance="fill">
+              <mat-label>Доставити з</mat-label>
+              <mat-select formControlName="locationFromId"
+                          (selectionChange)="disableSelectedLocation($event.value)">
+                <mat-option [disabled]="readonly" *ngFor="let location of locations" [value]="location.id">{{location.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div style="flex: 0 0 49%; max-width: 49%;">
+            <mat-form-field style="width: 100%;" appearance="fill">
+              <mat-label>Доставити до</mat-label>
+              <mat-select formControlName="locationToId"
+                          (selectionChange)="disableSelectedLocation($event.value)">
+                <mat-option *ngFor="let location of locations" [value]="location.id"
+                            [disabled]="location.id === selectedLocationFromId || readonly">{{location.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div>
+          <mat-form-field style="width: 100%;" appearance="fill">
+            <mat-label>Оплата за доставку</mat-label>
+            <input [readonly]="readonly" matInput formControlName="deliveryPrice">
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field style="width: 100%;" appearance="fill">
+            <mat-label>Водій</mat-label>
+            <input readonly matInput formControlName="driver">
+          </mat-form-field>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: right;" mat-dialog-actions>
+        <div>
+          <button mat-raised-button color="accent" (click)="closeWindow()">Закрити</button>
+          <button *ngIf="!readonly" style="margin-left: 10px" mat-raised-button color="primary"
+                  (click)="putOrder()">Оновити замовлення
+          </button>
+        </div>
+    </div>
+    </div>
+  </form>
+  <app-client-footer class="mt-auto"></app-client-footer>
+</div>

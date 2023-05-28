@@ -23,9 +23,12 @@ import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatSelectModule} from "@angular/material/select";
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ClientCreateOrderComponent } from './client/client-orders/client-create-order/client-create-order.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {AuthInterceptorService} from "./helpers/auth-interceptor.service";
+import { ClientOrderDetailsComponent } from './client/client-orders/client-order-details/client-order-details.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import { ClientCreateOrderComponent } from './client/client-orders/client-create
     ClientHeaderComponent,
     ClientOrdersComponent,
     ClientFooterComponent,
-    ClientCreateOrderComponent
+    ClientCreateOrderComponent,
+    ClientOrderDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -58,8 +62,11 @@ import { ClientCreateOrderComponent } from './client/client-orders/client-create
     MatSelectModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

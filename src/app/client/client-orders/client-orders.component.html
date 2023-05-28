@@ -1,249 +1,79 @@
 <app-client-header></app-client-header>
 <div class="flex-wrapper">
   <div>
-    <button mat-stroked-button class="m-4 p-4" color="primary" style="font-size: x-large; width: 320px">
+    <button (click)="createOrderDialog()" mat-stroked-button class="m-4 p-4" color="primary"
+            style="font-size: x-large; width: 320px">
       <mat-icon fontIcon="add"></mat-icon>
       Нове замовлення
     </button>
   </div>
-    <div class="orders-list ms-4 mb-4">
+  <div class="orders-list ms-4 mb-4">
+    <div *ngFor="let order of orders">
       <div class="order-item me-4">
         <mat-card>
           <mat-card-content>
             <div class="mb-2" style="display: flex; justify-content: space-between;">
-              <div class="pb-1" style="font-size: x-large;">
-                Назва замовлення
+              <div class="pd-1 single-line" style="font-size: x-large;" title= '{{order.name}}'>
+                {{order.name}}
               </div>
-              <div class="p-1" style="background: #F8F3D4; border-radius: 4px; font-size: small; font-weight: lighter">
+              <div *ngIf="order.status === 'CREATED'" class="p-1"
+                   style="background: #F8F3D4; border-radius: 4px; font-size: small; font-weight: lighter">
                 Створено
               </div>
+              <div *ngIf="order.status === 'ACCEPTED'" class="p-1"
+                   style="background: #FFDE7D; border-radius: 4px; font-size: small; font-weight: lighter">
+                Прийнято
+              </div>
+              <div *ngIf="order.status === 'DELIVERING'" class="p-1"
+                   style="background: #62C3A4; border-radius: 4px; font-size: small; font-weight: lighter">
+                В дорозі
+              </div>
+              <div *ngIf="order.status === 'FINISHED'" class="p-1"
+                   style="background: #5A98D1; border-radius: 4px; font-size: small; font-weight: lighter">
+                Доставлено
+              </div>
+              <div *ngIf="order.status === 'CANCELED'" class="p-1"
+                   style="background: #E07272; border-radius: 4px; font-size: small; font-weight: lighter">
+                Скасовано
+              </div>
+            </div>
+            <hr>
+            <div *ngIf="order.type === 'MATERIALS'">
+              Тип: Матеріали
+            </div>
+            <div *ngIf="order.type === 'PRODUCTS'">
+              Тип: Продукти
+            </div>
+            <div *ngIf="order.type === 'FRAGILE'">
+              Тип: Крихкий вантаж
+            </div>
+            <div *ngIf="order.type === 'DANGER'">
+              Тип: Небезпечний вантаж
+            </div>
+            <div *ngIf="order.type === 'OTHER'">
+              Тип: Інше
             </div>
             <hr>
             <div>
-              Тип: some type
+              Від: {{order.locationFrom.name}}
+            </div>
+            <div>
+              До: {{order.locationTo.name}}
             </div>
             <hr>
             <div>
-              Від: location1
-            </div>
-            <div>
-              До: location2
-            </div>
-            <hr>
-            <div>
-              Срок: 01.01.2003
+              Срок: {{convertDate(order.deliverDueTime)}}
             </div>
             <hr>
           </mat-card-content>
           <mat-card-actions align="end">
-            <button mat-flat-button color="accent" style="font-size: small">Видалити</button>
-            <button class="ms-2" mat-flat-button color="primary" style="font-size: small">Відкрити</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-      <div class="order-item me-4">
-        <mat-card>
-          <mat-card-content>
-            <div class="mb-2" style="display: flex; justify-content: space-between;">
-              <div class="pb-1" style="font-size: x-large;">
-                Order name
-              </div>
-              <div class="p-1" style="background: #FFDE7D; border-radius: 4px; font-size: small; font-weight: lighter">
-                Accepted
-              </div>
-            </div>
-            <hr>
-            <div>
-              Type: some type
-            </div>
-            <hr>
-            <div>
-              From: location1
-            </div>
-            <div>
-              To: location2
-            </div>
-            <hr>
-            <div>
-              Deadline: 01.01.2003
-            </div>
-            <hr>
-          </mat-card-content>
-          <mat-card-actions align="end">
-            <button class="ms-2" mat-flat-button color="primary" style="font-size: small">Open</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-      <div class="order-item me-4">
-        <mat-card>
-          <mat-card-content>
-            <div class="mb-2" style="display: flex; justify-content: space-between;">
-              <div class="pb-1" style="font-size: x-large;">
-                Order name
-              </div>
-              <div class="p-1" style="background: #F6416C; border-radius: 4px; font-size: small; font-weight: lighter">
-                Delivered
-              </div>
-            </div>
-            <hr>
-            <div>
-              Type: some type
-            </div>
-            <hr>
-            <div>
-              From: location1
-            </div>
-            <div>
-              To: location2
-            </div>
-            <hr>
-            <div>
-              Deadline: 01.01.2003
-            </div>
-            <hr>
-          </mat-card-content>
-          <mat-card-actions align="end">
-            <button mat-flat-button color="warn" style="font-size: small">Delete</button>
-            <button class="ms-2" mat-flat-button color="primary" style="font-size: small">Open</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-      <div class="order-item me-4">
-        <mat-card>
-          <mat-card-content>
-            <div class="mb-2" style="display: flex; justify-content: space-between;">
-              <div class="pb-1" style="font-size: x-large;">
-                Order name
-              </div>
-              <div class="p-1" style="background: #F6416C; border-radius: 4px; font-size: small; font-weight: lighter">
-                Delivered
-              </div>
-            </div>
-            <hr>
-            <div>
-              Type: some type
-            </div>
-            <hr>
-            <div>
-              From: location1
-            </div>
-            <div>
-              To: location2
-            </div>
-            <hr>
-            <div>
-              Deadline: 01.01.2003
-            </div>
-            <hr>
-          </mat-card-content>
-          <mat-card-actions align="end">
-            <button mat-flat-button color="warn" style="font-size: small">Delete</button>
-            <button class="ms-2" mat-flat-button color="primary" style="font-size: small">Open</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-      <div class="order-item me-4">
-        <mat-card>
-          <mat-card-content>
-            <div class="mb-2" style="display: flex; justify-content: space-between;">
-              <div class="pb-1" style="font-size: x-large;">
-                Order name
-              </div>
-              <div class="p-1" style="background: #F6416C; border-radius: 4px; font-size: small; font-weight: lighter">
-                Delivered
-              </div>
-            </div>
-            <hr>
-            <div>
-              Type: some type
-            </div>
-            <hr>
-            <div>
-              From: location1
-            </div>
-            <div>
-              To: location2
-            </div>
-            <hr>
-            <div>
-              Deadline: 01.01.2003
-            </div>
-            <hr>
-          </mat-card-content>
-          <mat-card-actions align="end">
-            <button mat-flat-button color="warn" style="font-size: small">Delete</button>
-            <button class="ms-2" mat-flat-button color="primary" style="font-size: small">Open</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-      <div class="order-item me-4">
-        <mat-card>
-          <mat-card-content>
-            <div class="mb-2" style="display: flex; justify-content: space-between;">
-              <div class="pb-1" style="font-size: x-large;">
-                Order name
-              </div>
-              <div class="p-1" style="background: #F6416C; border-radius: 4px; font-size: small; font-weight: lighter">
-                Delivered
-              </div>
-            </div>
-            <hr>
-            <div>
-              Type: some type
-            </div>
-            <hr>
-            <div>
-              From: location1
-            </div>
-            <div>
-              To: location2
-            </div>
-            <hr>
-            <div>
-              Deadline: 01.01.2003
-            </div>
-            <hr>
-          </mat-card-content>
-          <mat-card-actions align="end">
-            <button mat-flat-button color="warn" style="font-size: small">Delete</button>
-            <button class="ms-2" mat-flat-button color="primary" style="font-size: small">Open</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-      <div class="order-item me-4">
-        <mat-card>
-          <mat-card-content>
-            <div class="mb-2" style="display: flex; justify-content: space-between;">
-              <div class="pb-1" style="font-size: x-large;">
-                Order name
-              </div>
-              <div class="p-1" style="background: #F6416C; border-radius: 4px; font-size: small; font-weight: lighter">
-                Delivered
-              </div>
-            </div>
-            <hr>
-            <div>
-              Type: some type
-            </div>
-            <hr>
-            <div>
-              From: location1
-            </div>
-            <div>
-              To: location2
-            </div>
-            <hr>
-            <div>
-              Deadline: 01.01.2003
-            </div>
-            <hr>
-          </mat-card-content>
-          <mat-card-actions align="end">
-            <button mat-flat-button color="warn" style="font-size: small">Delete</button>
-            <button class="ms-2" mat-flat-button color="primary" style="font-size: small">Open</button>
+            <button *ngIf="order.status === 'CREATED' || order.status === 'FINISHED' || order.status === 'CANCELED'" mat-flat-button color="accent" style="font-size: small">Видалити</button>
+            <button *ngIf="order.status === 'CREATED' "class="ms-2" mat-flat-button color="primary" style="font-size: small" (click)="openOrderDetails(order.id)">Редагувати</button>
+            <button *ngIf="order.status != 'CREATED' "class="ms-2" mat-flat-button color="primary" style="font-size: small" (click)="openOrderDetails(order.id)">Відкрити</button>
           </mat-card-actions>
         </mat-card>
       </div>
     </div>
+  </div>
   <app-client-footer class="mt-auto"></app-client-footer>
 </div>

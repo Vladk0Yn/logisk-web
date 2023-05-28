@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MatButtonToggleChange} from "@angular/material/button-toggle";
 import {AuthService} from "../../services/auth.service";
 import {NotificationService} from "../../services/notification.service";
-import {RegisterRequest} from "../../models/RegisterRequest";
+import {RegisterRequest} from "../../models/request/RegisterRequest";
 
 @Component({
   selector: 'app-registration',
@@ -22,7 +22,7 @@ export class RegistrationComponent {
     password: [null, Validators.required]
   });
 
-  constructor (
+  constructor(
     private router: Router,
     private authService: AuthService,
     private notificationService: NotificationService,
@@ -39,12 +39,13 @@ export class RegistrationComponent {
   submit(): void {
     let request: RegisterRequest = this.registerForm.value;
     request.role = this.role;
-    this.authService.register(request).subscribe(data => {
-      console.log(request)
-      this.notificationService.showSnackBar("Успішно зареєстровано, можете увійти за допомогою логіну та паролю");
-      this.router.navigate(['/login']);
-    }, error => {
-      this.notificationService.showSnackBar("Сталася помилка, спробуйте ще");
-    })
+    this.authService.register(request).subscribe({
+      next: (data) => {
+        this.notificationService.showSnackBar("Успішно зареєстровано, можете увійти за допомогою логіну та паролю");
+        this.router.navigate(['/login']);
+      }, error: (error) => {
+        this.notificationService.showSnackBar("Сталася помилка, спробуйте ще");
+      }
+    });
   }
 }

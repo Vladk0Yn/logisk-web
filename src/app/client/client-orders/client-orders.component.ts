@@ -59,4 +59,15 @@ export class ClientOrdersComponent implements OnInit {
   openOrderDetails(id: number) {
     this.router.navigate(['client/orders', id]);
   }
+
+  deleteOrder(id: number) {
+    this.ordersService.deleteOrder(id).subscribe({
+      next: (data) => {
+        this.notificationService.showSnackBar("Замовлення успішно видалене");
+        location.reload();
+      }, error: (error) => {
+        this.notificationService.showSnackBar("Сталася помилка при видаленні");
+      }
+    });
+  }
 }

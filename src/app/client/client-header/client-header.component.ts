@@ -22,4 +22,8 @@ export class ClientHeaderComponent {
     this.userStorageService.logOut();
     this.router.navigate(['/login']);
   }
+
+  navigateOrders() {
+    this.router.navigate(['client/orders']);
+  }
 }

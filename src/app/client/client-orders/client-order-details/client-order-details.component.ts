@@ -37,7 +37,6 @@ export class ClientOrderDetailsComponent implements OnInit {
   }
 
   initOrderForm(): void {
-    console.log(new Date(this.order.createdTime).toLocaleString())
     this.orderForm = this.formBuilder.group({
         name: [this.order.name, Validators.required],
         weight: [this.order.weight, Validators.required],
@@ -49,14 +48,13 @@ export class ClientOrderDetailsComponent implements OnInit {
         deliverDueTime: [new Date(this.order.deliverDueTime).toISOString().slice(0, 16), Validators.required],
         locationToId: [this.order.locationTo.id, Validators.required],
         locationFromId: [this.order.locationFrom.id, Validators.required],
-        driver: [this.order.driverId]
+        driverName: ["Микола"],
+        driverPhone: ["+380892391392"],
+        driverEmail: ["mykola@gmail.com"],
+        transportName: ["Mersedes Sprinter"],
+        transportCode: ["АМ3006СХ"]
       }
     );
-  }
-
-  convertMillisecondsToDate(milliseconds: number): string {
-    const date = new Date(milliseconds);
-    return date.toISOString(); // Returns the date string in the format "YYYY-MM-DDTHH:mm:ss.sssZ"
   }
 
   setupOrderById(id: number) {
@@ -91,8 +89,24 @@ export class ClientOrderDetailsComponent implements OnInit {
   }
 
   putOrder() {
-
+    this.orderService.putOrder({
+      id: this.order.id,
+      name: this.orderForm.value.name,
+      weight: this.orderForm.value.weight,
+      width: this.orderForm.value.width,
+      height: this.orderForm.value.height,
+      type: this.orderForm.value.type,
+      deliveryPrice: this.orderForm.value.deliveryPrice,
+      deliverDueTime: new Date(this.orderForm.value.deliverDueTime).getTime(),
+      locationToId: this.orderForm.value.locationToId,
+      locationFromId: this.orderForm.value.locationFromId
+    }).subscribe({
+      next: (data) => {
+        this.notificationService.showSnackBar("Замовлення на доставку успішно оновлене");
+        this.router.navigate(["client/orders"]);
+      }, error: (error) => {
+        this.notificationService.showSnackBar("Сталася помилка, перевірте правильність данних");
+      }
+    });
   }
-
-  protected readonly close = close;
 }

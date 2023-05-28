@@ -29,7 +29,6 @@ import { ClientCreateOrderComponent } from './client/client-orders/client-create
 import {MatDialogModule} from "@angular/material/dialog";
 import {AuthInterceptorService} from "./helpers/auth-interceptor.service";
 import { ClientOrderDetailsComponent } from './client/client-orders/client-order-details/client-order-details.component';
-
 @NgModule({
   declarations: [
     AppComponent,

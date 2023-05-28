@@ -67,7 +67,7 @@
             <hr>
           </mat-card-content>
           <mat-card-actions align="end">
-            <button *ngIf="order.status === 'CREATED' || order.status === 'FINISHED' || order.status === 'CANCELED'" mat-flat-button color="accent" style="font-size: small">Видалити</button>
+            <button *ngIf="order.status === 'CREATED' || order.status === 'FINISHED' || order.status === 'CANCELED'" mat-flat-button color="accent" style="font-size: small" (click)="deleteOrder(order.id)">Видалити</button>
             <button *ngIf="order.status === 'CREATED' "class="ms-2" mat-flat-button color="primary" style="font-size: small" (click)="openOrderDetails(order.id)">Редагувати</button>
             <button *ngIf="order.status != 'CREATED' "class="ms-2" mat-flat-button color="primary" style="font-size: small" (click)="openOrderDetails(order.id)">Відкрити</button>
           </mat-card-actions>

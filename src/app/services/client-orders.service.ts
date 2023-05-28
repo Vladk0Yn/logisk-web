@@ -34,4 +34,23 @@ export class ClientOrdersService {
   public getOrder(id: number): Observable<any> {
     return this.http.get(CLIENT_ORDERS_API + "/" + id);
   }
+
+  public putOrder(order: OrderRequest): Observable<any> {
+    return this.http.put(CLIENT_ORDERS_API + "/put", {
+      id: order.id,
+      name: order.name,
+      weight: order.weight,
+      height: order.height,
+      width: order.width,
+      type: order.type,
+      deliveryPrice: order.deliveryPrice,
+      deliverDueTime: order.deliverDueTime,
+      locationToId: order.locationToId,
+      locationFromId: order.locationFromId
+    });
+  }
+
+  public deleteOrder(id: number): Observable<any> {
+    return this.http.delete(CLIENT_ORDERS_API + "/delete/" + id);
+  }
 }

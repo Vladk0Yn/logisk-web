@@ -96,25 +96,25 @@
           </mat-form-field>
         </div>
 
-        <div>
+        <div *ngIf="driver != null">
           <h2>Деталі про водія та автомобіль:</h2>
           <div>
             <mat-form-field style="width: 100%;" appearance="fill">
               <mat-label>Ім'я водія</mat-label>
-              <input readonly matInput formControlName="driverName">
+              <input readonly matInput [value]="driver.name">
             </mat-form-field>
           </div>
           <div style="display: flex; justify-content: space-between">
             <div style="flex: 0 0 39%; max-width: 39%;">
               <mat-form-field style="width: 100%;" appearance="fill">
                 <mat-label>Номер телефону:</mat-label>
-                <input readonly matInput formControlName="driverPhone">
+                <input readonly matInput [value]="driver.phoneNumber">
               </mat-form-field>
             </div>
             <div style="flex: 0 0 59%; max-width: 59%;">
               <mat-form-field style="width: 100%;" appearance="fill">
                 <mat-label>Електронна пошта:</mat-label>
-                <input readonly matInput formControlName="driverEmail">
+                <input readonly matInput [value]="driver.email">
               </mat-form-field>
             </div>
           </div>
@@ -122,13 +122,13 @@
             <div style="flex: 0 0 69%; max-width: 69%;">
               <mat-form-field style="width: 100%;" appearance="fill">
                 <mat-label>Назва авто:</mat-label>
-                <input readonly matInput formControlName="transportName">
+                <input readonly matInput [value]="driver.transport.name">
               </mat-form-field>
             </div>
             <div style="flex: 0 0 29%; max-width: 29%;">
               <mat-form-field style="width: 100%;" appearance="fill">
                 <mat-label>Номер авто:</mat-label>
-                <input readonly matInput formControlName="transportCode">
+                <input readonly matInput [value]="driver.transport.code">
               </mat-form-field>
             </div>
           </div>
@@ -138,9 +138,14 @@
       </div>
       <div style="display: flex; justify-content: right;" mat-dialog-actions>
         <div>
-          <button mat-raised-button color="accent" (click)="closeWindow()">Закрити</button>
+          <button mat-raised-button color="accent" (click)="closeWindow()">
+            <mat-icon>close</mat-icon>
+            Закрити
+          </button>
           <button *ngIf="!readonly" style="margin-left: 10px" mat-raised-button color="primary"
-                  (click)="putOrder()">Оновити замовлення
+                  (click)="putOrder()">
+            <mat-icon>done</mat-icon>
+            Оновити замовлення
           </button>
         </div>
     </div>

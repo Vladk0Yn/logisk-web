@@ -29,6 +29,14 @@ import { ClientCreateOrderComponent } from './client/client-orders/client-create
 import {MatDialogModule} from "@angular/material/dialog";
 import {AuthInterceptorService} from "./helpers/auth-interceptor.service";
 import { ClientOrderDetailsComponent } from './client/client-orders/client-order-details/client-order-details.component';
+import {GoogleMapsModule} from "@angular/google-maps";
+import { ClientLocationsComponent } from './client/locations/client-locations/client-locations.component';
+import { DriverHeaderComponent } from './driver/driver-header/driver-header.component';
+import { DriverFooterComponent } from './driver/driver-footer/driver-footer.component';
+import { DriverNewOrdersComponent } from './driver/driver-new-orders/driver-new-orders.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
+import {MatPaginatorModule} from "@angular/material/paginator";
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +46,11 @@ import { ClientOrderDetailsComponent } from './client/client-orders/client-order
     ClientOrdersComponent,
     ClientFooterComponent,
     ClientCreateOrderComponent,
-    ClientOrderDetailsComponent
+    ClientOrderDetailsComponent,
+    ClientLocationsComponent,
+    DriverHeaderComponent,
+    DriverFooterComponent,
+    DriverNewOrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +73,11 @@ import { ClientOrderDetailsComponent } from './client/client-orders/client-order
     MatSelectModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    GoogleMapsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}

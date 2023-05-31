@@ -1,21 +1,20 @@
-import { Component } from '@angular/core';
-import {UserStorageService} from "../../services/user-storage.service";
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
+import {UserStorageService} from "../../services/user-storage.service";
 
 @Component({
-  selector: 'app-client-header',
-  templateUrl: './client-header.component.html',
-  styleUrls: ['./client-header.component.css']
+  selector: 'app-driver-header',
+  templateUrl: './driver-header.component.html',
+  styleUrls: ['./driver-header.component.css']
 })
-export class ClientHeaderComponent {
-
-  userBalance: number;
+export class DriverHeaderComponent {
+  driverBalance: number;
 
   constructor(
     private router: Router,
     private userStorageService: UserStorageService
   ) {
-    this.userBalance = userStorageService.getUser().balance;
+    this.driverBalance = userStorageService.getUser().balance;
   }
 
   logout(): void {

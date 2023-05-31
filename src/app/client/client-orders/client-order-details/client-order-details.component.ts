@@ -6,6 +6,7 @@ import {OrderResponse} from "../../../models/response/OrderResponse";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LocationResponse} from "../../../models/response/LocationResponse";
 import {ClientLocationsService} from "../../../services/client-locations.service";
+import {DriverResponse} from "../../../models/response/DriverResponse";
 
 @Component({
   selector: 'app-client-order-details',
@@ -16,6 +17,7 @@ export class ClientOrderDetailsComponent implements OnInit {
   orderId: number;
   orderForm: FormGroup;
   order: OrderResponse;
+  driver: DriverResponse;
   readonly: boolean = false;
   selectedLocationFromId: number;
   locations: LocationResponse[];
@@ -47,20 +49,28 @@ export class ClientOrderDetailsComponent implements OnInit {
         createdTime: [new Date(this.order.createdTime).toISOString().slice(0, 16), Validators.required],
         deliverDueTime: [new Date(this.order.deliverDueTime).toISOString().slice(0, 16), Validators.required],
         locationToId: [this.order.locationTo.id, Validators.required],
-        locationFromId: [this.order.locationFrom.id, Validators.required],
-        driverName: ["Микола"],
-        driverPhone: ["+380892391392"],
-        driverEmail: ["mykola@gmail.com"],
-        transportName: ["Mersedes Sprinter"],
-        transportCode: ["АМ3006СХ"]
+        locationFromId: [this.order.locationFrom.id, Validators.required]
       }
     );
+  }
+
+  setupOrderDriver(): void {
+    this.orderService.getOrderDriver(this.orderId).subscribe({
+      next: (data) => {
+        this.driver = <DriverResponse>JSON.parse(JSON.stringify(data));
+      }, error: (error) => {
+        this.notificationService.showSnackBar("Помилка при завантаженні інформації про водія")
+    }
+    });
   }
 
   setupOrderById(id: number) {
     this.orderService.getOrder(id).subscribe({
       next: (data) => {
         this.order = <OrderResponse>JSON.parse(JSON.stringify(data));
+        if (this.order.driverId != null) {
+          this.setupOrderDriver();
+        }
         if (this.order.status != "CREATED") {
           this.readonly = true;
         }

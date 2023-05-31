@@ -83,8 +83,14 @@
 </form>
 <div style="display: flex; justify-content: right;" mat-dialog-actions>
   <div>
-    <button mat-raised-button color="accent" mat-dialog-close>Закрити</button>
+    <button mat-raised-button color="accent" mat-dialog-close>
+      <mat-icon>close</mat-icon>
+      Закрити
+    </button>
     <button style="margin-left: 10px" [disabled]="orderForm.untouched" mat-raised-button color="primary"
-            (click)="createOrder()">Створити замовлення</button>
+            (click)="createOrder()">
+      <mat-icon>done</mat-icon>
+      Створити замовлення
+    </button>
   </div>
 </div>

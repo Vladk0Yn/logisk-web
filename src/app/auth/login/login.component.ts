@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
               break;
             }
             case "DRIVER": {
-              this.router.navigate(['driver/orders'])
+              this.router.navigate(['driver/orders/new'])
               break;
             }
           }

@@ -53,4 +53,8 @@ export class ClientOrdersService {
   public deleteOrder(id: number): Observable<any> {
     return this.http.delete(CLIENT_ORDERS_API + "/delete/" + id);
   }
+
+  public getOrderDriver(id: number): Observable<any> {
+    return this.http.get(CLIENT_ORDERS_API + "/" + id + "/driver");
+  }
 }

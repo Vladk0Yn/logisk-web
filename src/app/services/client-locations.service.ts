@@ -32,6 +32,6 @@ export class ClientLocationsService {
   }
 
   public deleteLocation(id: number): Observable<any> {
-    return this.http.delete(CLIENT_LOCATIONS_API + "/delete/" + id);
+    return this.http.delete(CLIENT_LOCATIONS_API + "/" + id);
   }
 }

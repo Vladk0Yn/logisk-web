@@ -36,7 +36,7 @@ export class ClientOrdersService {
   }
 
   public putOrder(order: OrderRequest): Observable<any> {
-    return this.http.put(CLIENT_ORDERS_API + "/put", {
+    return this.http.put(CLIENT_ORDERS_API, {
       id: order.id,
       name: order.name,
       weight: order.weight,
@@ -51,7 +51,7 @@ export class ClientOrdersService {
   }
 
   public deleteOrder(id: number): Observable<any> {
-    return this.http.delete(CLIENT_ORDERS_API + "/delete/" + id);
+    return this.http.delete(CLIENT_ORDERS_API + "/" + id);
   }
 
   public getOrderDriver(id: number): Observable<any> {

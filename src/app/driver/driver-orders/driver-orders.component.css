@@ -23,12 +23,3 @@
   justify-content: space-between;
 }
 
-.card-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.button-group {
-  display: flex;
-}

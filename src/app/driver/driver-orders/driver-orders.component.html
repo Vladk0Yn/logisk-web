@@ -1,4 +1,4 @@
-<app-client-header></app-client-header>
+<app-driver-header></app-driver-header>
 <div class="flex-wrapper">
   <div class="orders-list m-4">
     <div *ngFor="let order of orders">
@@ -48,10 +48,10 @@
             </div>
             <hr>
             <div>
-              Від: {{order.locationFrom.name}}
+              Від: {{order.locationFrom.address}}
             </div>
             <div>
-              До: {{order.locationTo.name}}
+              До: {{order.locationTo.address}}
             </div>
             <hr>
             <div>
@@ -59,28 +59,30 @@
             </div>
             <hr>
           </mat-card-content>
-          <mat-card-actions align="end">
-            <button *ngIf="order.status === 'CREATED' || order.status === 'FINISHED' || order.status === 'CANCELED'" mat-flat-button color="accent" style="font-size: small; width: 100%" (click)="deleteOrder(order.id)">
+          <mat-card-actions style="display: flex; justify-content: center;">
+            <button (click)="setOrderCanceled(order.id)" *ngIf="order.status === 'ACCEPTED'" mat-icon-button color="accent" style="font-size: small;">
+              <mat-icon>cancel</mat-icon>
+            </button>
+            <button (click)="setOrderCanceled(order.id)" *ngIf="order.status === 'FINISHED'" mat-flat-button color="accent" style="font-size: small; width: 100%">
               <mat-icon>delete</mat-icon>
               Видалити
             </button>
-            <button *ngIf="order.status === 'CREATED' || order.status === 'CANCELED'" class="ms-2" mat-flat-button color="primary" style="font-size: small; width: 100%" (click)="openOrderDetails(order.id)">
-              <mat-icon>edit</mat-icon>
-              Редагувати
+            <button (click)="setOrderDelivering(order.id)" *ngIf="order.status === 'ACCEPTED'" class="ms-2" color="primary" mat-flat-button style="font-size: small; width: 100%">
+              <mat-icon>navigation</mat-icon>
+              В дорогу
             </button>
-            <button *ngIf="order.status != 'CREATED' && order.status != 'CANCELED' " class="ms-2" mat-flat-button color="primary" style="font-size: small; width: 100%" (click)="openOrderDetails(order.id)">
+            <button (click)="setOrderFinished(order.id)" *ngIf="order.status === 'DELIVERING'"  mat-flat-button style="font-size: small; background: #5A98D1; color: #FFFFFF; width: 100%">
+              <mat-icon>timeline</mat-icon>
+              Доставив одержувачу
+            </button>
+            <button mat-icon-button *ngIf="order.status != 'CREATED' " class="ms-2" (click)="openOrderDetails(order.id)">
               <mat-icon>more_horiz</mat-icon>
-              Відкрити
             </button>
           </mat-card-actions>
+
         </mat-card>
       </div>
     </div>
-    <button (click)="createOrderDialog()" mat-stroked-button color="primary"
-            style="font-size: x-large; height: auto; min-height: 250px" class="order-item">
-      <mat-icon>add_box</mat-icon>
-      Нове замовлення
-    </button>
   </div>
-  <app-client-footer></app-client-footer>
+  <app-driver-footer></app-driver-footer>
 </div>

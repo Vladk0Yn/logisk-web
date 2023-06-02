@@ -71,7 +71,7 @@ export class ClientOrderDetailsComponent implements OnInit {
         if (this.order.driverId != null) {
           this.setupOrderDriver();
         }
-        if (this.order.status != "CREATED") {
+        if (this.order.status != "CREATED" && this.order.status != 'CANCELED') {
           this.readonly = true;
         }
         this.initOrderForm();

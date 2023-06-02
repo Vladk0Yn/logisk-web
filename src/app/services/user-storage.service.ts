@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {UserResponse} from "../models/response/UserResponse";
+import {Route, Router} from "@angular/router";
 
 const USER_KEY = 'user';
 const TOKEN_KEY = 'token'
@@ -9,7 +10,7 @@ const TOKEN_KEY = 'token'
 })
 export class UserStorageService {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   public saveUser(user: UserResponse): void {
     window.sessionStorage.removeItem(USER_KEY);

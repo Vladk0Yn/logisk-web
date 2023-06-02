@@ -70,4 +70,19 @@ export class DriverNewOrdersComponent implements OnInit {
     }
     return 'Інше';
   }
+
+  takeOrder(id: number) {
+    this.ordersService.takeOrder(id).subscribe({
+      next: (data) => {
+        this.notificationService.showSnackBar("Доставку успішно обрано");
+        this.router.navigate(['driver/orders']);
+      }, error: (error) => {
+        this.notificationService.showSnackBar("Сталася помилка при обранні доставки");
+      }
+    });
+  }
+
+  openOrderDetails(id: number) {
+    this.router.navigate(['driver/orders', id]);
+  }
 }

@@ -13,4 +13,24 @@ export class DriverOrdersService {
   getAvailableOrders(): Observable<any> {
     return this.http.get(DRIVER_ORDER_API + "/available");
   }
+
+  takeOrder(id: number): Observable<any> {
+    return this.http.put(DRIVER_ORDER_API + "/available/" + id + "/take", {});
+  }
+
+  getOrder(id: number): Observable<any> {
+    return this.http.get(DRIVER_ORDER_API + "/" + id);
+  }
+
+  getOrders(): Observable<any> {
+    return this.http.get(DRIVER_ORDER_API);
+  }
+
+  getOrderClient(id: number): Observable<any> {
+    return this.http.get(DRIVER_ORDER_API + "/" + id + "/client")
+  }
+
+  setOrderStatus(id: number, status: string): Observable<any> {
+    return this.http.put(DRIVER_ORDER_API + "/" + id + "/status?status=" + status, {});
+  }
 }

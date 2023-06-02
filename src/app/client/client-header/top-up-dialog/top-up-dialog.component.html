@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Введіть суму поповнення</h1>
+<div mat-dialog-content>
+  <mat-form-field style="width: 100%" appearance="outline">
+    <input matInput [(ngModel)]="amount">
+  </mat-form-field>
+</div>
+<div style="display: flex; justify-content: right;" mat-dialog-actions>
+  <div>
+    <button mat-raised-button color="accent" mat-dialog-close>
+      <mat-icon>close</mat-icon>
+      Закрити
+    </button>
+    <button style="margin-left: 10px" [disabled]="amount === null" mat-raised-button color="primary"
+            (click)="topUp()">
+      <mat-icon>done</mat-icon>
+      Поповнити
+    </button>
+  </div>
+</div>

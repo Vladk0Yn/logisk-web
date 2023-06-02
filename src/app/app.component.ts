@@ -13,7 +13,7 @@ export class AppComponent {
     private userService: UserStorageService,
     private router: Router
   ) {
-      if (!userService.getUser()) {
+      if (userService.getUser() === null) {
         this.router.navigate(['login']);
       }
     }

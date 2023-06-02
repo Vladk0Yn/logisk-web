@@ -5,6 +5,8 @@ import {MatButtonToggleChange} from "@angular/material/button-toggle";
 import {AuthService} from "../../services/auth.service";
 import {NotificationService} from "../../services/notification.service";
 import {RegisterRequest} from "../../models/request/RegisterRequest";
+import {UserResponse} from "../../models/response/UserResponse";
+import {UserStorageService} from "../../services/user-storage.service";
 
 @Component({
   selector: 'app-registration',
@@ -12,8 +14,9 @@ import {RegisterRequest} from "../../models/request/RegisterRequest";
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-  role = 'CLIENT'
+  role = 'CLIENT';
   hide = true;
+  user: UserResponse;
 
   registerForm: FormGroup = this.formBuilder.group({
     name: [null, Validators.required],
@@ -26,6 +29,7 @@ export class RegistrationComponent {
     private router: Router,
     private authService: AuthService,
     private notificationService: NotificationService,
+    private userStorageService: UserStorageService,
     private formBuilder: FormBuilder) {
   }
 
@@ -41,11 +45,27 @@ export class RegistrationComponent {
     request.role = this.role;
     this.authService.register(request).subscribe({
       next: (data) => {
-        this.notificationService.showSnackBar("Успішно зареєстровано, можете увійти за допомогою логіну та паролю");
-        this.router.navigate(['/login']);
+        this.user = <UserResponse>JSON.parse(JSON.stringify(data));
+        this.userStorageService.saveUser(this.user);
+        this.user = this.userStorageService.getUser()
+        this.notificationService.showSnackBar("Вітаємо, " + this.user.name);
+        if (this.user != null) {
+          this.userStorageService.saveToken(btoa(request.email + ':' + request.password));
+          switch (this.user.role) {
+            case "CLIENT": {
+              this.router.navigate(['client/locations']);
+              break;
+            }
+            case "DRIVER": {
+              this.router.navigate(['driver/transport/register']);
+              break;
+            }
+          }
+        }
       }, error: (error) => {
         this.notificationService.showSnackBar("Сталася помилка, спробуйте ще");
       }
     });
   }
 }
+

@@ -14,6 +14,9 @@ export class DriverHeaderComponent {
     private router: Router,
     private userStorageService: UserStorageService
   ) {
+    if (userStorageService.getUser().role === 'CLIENT') {
+      userStorageService.logOut();
+    }
     this.driverBalance = userStorageService.getUser().balance;
   }
 
@@ -22,11 +25,15 @@ export class DriverHeaderComponent {
     this.router.navigate(['/login']);
   }
 
-  navigateOrders() {
-    this.router.navigate(['client/orders']);
+  navigateNewOrders() {
+    this.router.navigate(['driver/orders/new']);
   }
 
-  navigateLocations(): void {
-    this.router.navigate(['client/locations']);
+  navigateOrders(): void {
+    this.router.navigate(['driver/orders']);
+  }
+
+  navigateTransport(): void {
+    this.router.navigate(['driver/transport']);
   }
 }

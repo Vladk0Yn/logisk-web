@@ -37,6 +37,11 @@ import { DriverNewOrdersComponent } from './driver/driver-new-orders/driver-new-
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { DriverOrderDetailsComponent } from './driver/driver-order-details/driver-order-details.component';
+import { DriverOrdersComponent } from './driver/driver-orders/driver-orders.component';
+import { DriverCreateTransportComponent } from './driver/driver-create-transport/driver-create-transport.component';
+import { DriverTransportComponent } from './driver/driver-transport/driver-transport.component';
+import { TopUpDialogComponent } from './client/client-header/top-up-dialog/top-up-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +55,12 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     ClientLocationsComponent,
     DriverHeaderComponent,
     DriverFooterComponent,
-    DriverNewOrdersComponent
+    DriverNewOrdersComponent,
+    DriverOrderDetailsComponent,
+    DriverOrdersComponent,
+    DriverCreateTransportComponent,
+    DriverTransportComponent,
+    TopUpDialogComponent
   ],
   imports: [
     BrowserModule,

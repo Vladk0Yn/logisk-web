@@ -2,6 +2,7 @@ export interface OrderRequest {
   id: number;
   name: string;
   weight: number;
+  length: number;
   width: number
   height: number;
   type: string;

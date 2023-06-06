@@ -76,4 +76,8 @@ export class DriverOrdersComponent implements OnInit {
     });
   }
 
+  removeOrder(id: number) {
+    this.ordersService.removeOrder(id).subscribe();
+    location.reload();
+  }
 }

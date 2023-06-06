@@ -1,6 +1,13 @@
 .nav-button {
   font-weight: normal;
   font-size: large;
+  color: #FFFFFF;
 }
-
-
+.toolbar-fullhd {
+  min-height: 72px;
+}
+@media only screen and (max-width: 1366px) {
+  .toolbar-mobile {
+    min-height: 400px;
+  }
+}

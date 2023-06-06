@@ -1,7 +1,7 @@
 <app-client-header></app-client-header>
 <div class="flex-wrapper">
   <form *ngIf="order" [formGroup]="orderForm">
-    <div mat-dialog-content style="width: 500px; overflow-y: hidden;">
+    <div style="width: 500px; overflow-y: hidden;">
       <div class="justify-content-center">
         <h1>Доставка №{{orderId}}</h1>
         <div class="mt-1">
@@ -14,8 +14,8 @@
         <div style="display: flex; justify-content: space-between">
           <div style="flex: 0 0 32%; max-width: 32%;">
             <mat-form-field appearance="fill" style="width: 100%;">
-              <mat-label>Вага, г.</mat-label>
-              <input [readonly]="readonly" matInput formControlName="weight">
+              <mat-label>Довжина, см.</mat-label>
+              <input [readonly]="readonly" matInput formControlName="length">
             </mat-form-field>
           </div>
 
@@ -33,17 +33,25 @@
             </mat-form-field>
           </div>
         </div>
-        <div>
-          <mat-form-field style="width: 100%;" appearance="fill">
-            <mat-label>Тип вантажу</mat-label>
-            <mat-select formControlName="type">
-              <mat-option [disabled]="readonly" value="MATERIALS">Матеріали</mat-option>
-              <mat-option [disabled]="readonly" value="PRODUCTS">Продукти</mat-option>
-              <mat-option [disabled]="readonly" value="FRAGILE">Крихкий вантаж</mat-option>
-              <mat-option [disabled]="readonly" value="DANGER">Небезпечний вантаж</mat-option>
-              <mat-option [disabled]="readonly" value="OTHER">Інше</mat-option>
-            </mat-select>
-          </mat-form-field>
+        <div div style="display: flex; justify-content: space-between">
+          <div style="flex: 0 0 49%; max-width: 49%;">
+            <mat-form-field appearance="fill" style="width: 100%;">
+              <mat-label>Вага, кг.</mat-label>
+              <input [readonly]="readonly" matInput formControlName="weight">
+            </mat-form-field>
+          </div>
+          <div style="flex: 0 0 49%; max-width: 49%;">
+            <mat-form-field style="width: 100%;" appearance="fill">
+              <mat-label>Тип вантажу</mat-label>
+              <mat-select formControlName="type">
+                <mat-option [disabled]="readonly" value="MATERIALS">Матеріали</mat-option>
+                <mat-option [disabled]="readonly" value="PRODUCTS">Продукти</mat-option>
+                <mat-option [disabled]="readonly" value="FRAGILE">Крихкий вантаж</mat-option>
+                <mat-option [disabled]="readonly" value="DANGER">Небезпечний вантаж</mat-option>
+                <mat-option [disabled]="readonly" value="OTHER">Інше</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
 
         <h2>Час створення та срок доставки:</h2>
@@ -65,7 +73,7 @@
         </div>
 
         <h2>Місце відправки та прибуття:</h2>
-        <div style="display: flex; justify-content: space-between">
+        <div *ngIf="locations" style="display: flex; justify-content: space-between">
           <div style="flex: 0 0 49%; max-width: 49%;">
             <mat-form-field style="width: 100%;" appearance="fill">
               <mat-label>Доставити з</mat-label>
@@ -96,7 +104,7 @@
           </mat-form-field>
         </div>
 
-        <div *ngIf="driver != null">
+        <div *ngIf="driver">
           <h2>Деталі про водія та автомобіль:</h2>
           <div>
             <mat-form-field style="width: 100%;" appearance="fill">

@@ -18,6 +18,7 @@ export class DriverTransportService {
       name: request.name,
       type: request.type,
       code: request.code,
+      loadLength: request.loadLength,
       loadCapacity: request.loadCapacity,
       loadHeight: request.loadHeight,
       loadWidth: request.loadWidth
@@ -31,6 +32,7 @@ export class DriverTransportService {
       type: request.type,
       code: request.code,
       loadCapacity: request.loadCapacity,
+      loadLength: request.loadLength,
       loadHeight: request.loadHeight,
       loadWidth: request.loadWidth
     });

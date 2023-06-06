@@ -38,6 +38,9 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
+    if (this.loginForm.invalid) {
+      return;
+    }
     this.authService.login(this.loginForm.value).subscribe({
       next: (data) => {
         this.user = <UserResponse>JSON.parse(JSON.stringify(data));
@@ -46,7 +49,7 @@ export class LoginComponent implements OnInit {
         this.notificationService.showSnackBar("Вітаємо, " + this.user.name);
         if (this.user != null) {
           this.userStorageService.saveToken(btoa(this.loginForm.value.login + ':' + this.loginForm.value.password));
-          switch (this.user.role) {
+          switch (this.user.role.toUpperCase()) {
             case "CLIENT": {
               this.router.navigate(['client/orders']);
               break;

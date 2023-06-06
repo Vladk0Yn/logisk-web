@@ -42,6 +42,9 @@ import { DriverOrdersComponent } from './driver/driver-orders/driver-orders.comp
 import { DriverCreateTransportComponent } from './driver/driver-create-transport/driver-create-transport.component';
 import { DriverTransportComponent } from './driver/driver-transport/driver-transport.component';
 import { TopUpDialogComponent } from './client/client-header/top-up-dialog/top-up-dialog.component';
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import { WithdrawDialogComponent } from './driver/driver-header/withdraw-dialog/withdraw-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +63,8 @@ import { TopUpDialogComponent } from './client/client-header/top-up-dialog/top-u
     DriverOrdersComponent,
     DriverCreateTransportComponent,
     DriverTransportComponent,
-    TopUpDialogComponent
+    TopUpDialogComponent,
+    WithdrawDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +91,9 @@ import { TopUpDialogComponent } from './client/client-header/top-up-dialog/top-u
     GoogleMapsModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FlexLayoutModule,
+    MatSidenavModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}

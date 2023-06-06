@@ -10,7 +10,7 @@ import {DriverTransportService} from "../../services/driver-transport.service";
   templateUrl: './driver-create-transport.component.html',
   styleUrls: ['./driver-create-transport.component.css']
 })
-export class DriverCreateTransportComponent implements OnInit{
+export class DriverCreateTransportComponent implements OnInit {
 
   constructor(
     private router: Router,
@@ -28,6 +28,7 @@ export class DriverCreateTransportComponent implements OnInit{
     type: [null, Validators.required],
     code: [null, Validators.required],
     loadCapacity: [null, Validators.required],
+    loadLength: [null, Validators.required],
     loadHeight: [null, Validators.required],
     loadWidth: [null, Validators.required]
   });
@@ -39,6 +40,7 @@ export class DriverCreateTransportComponent implements OnInit{
       type: this.createTransportForm.value.type,
       code: this.createTransportForm.value.code,
       loadCapacity: this.createTransportForm.value.loadCapacity,
+      loadLength: this.createTransportForm.value.loadLength,
       loadHeight: this.createTransportForm.value.loadHeight,
       loadWidth: this.createTransportForm.value.loadWidth
     }).subscribe({

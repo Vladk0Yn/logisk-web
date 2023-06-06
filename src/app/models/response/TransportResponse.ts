@@ -5,5 +5,6 @@ export interface TransportResponse {
   code: string;
   loadCapacity: number;
   loadHeight: number;
+  loadLength: number;
   loadWidth: number;
 }

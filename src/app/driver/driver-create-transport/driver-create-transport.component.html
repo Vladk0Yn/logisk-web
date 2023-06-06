@@ -38,9 +38,9 @@
 
             <div style="display: flex; justify-content: space-between">
               <div style="flex: 0 0 32%; max-width: 32%;">
-                <mat-label style="font-size: large;" class="d-block mb-1">Макс. вага, г.</mat-label>
+                <mat-label style="font-size: large;" class="d-block mb-1">Макс. довжина, см.</mat-label>
                 <mat-form-field appearance="outline" style="width: 100%;">
-                  <input matInput formControlName="loadCapacity">
+                  <input matInput formControlName="loadLength">
                 </mat-form-field>
               </div>
 
@@ -57,6 +57,13 @@
                   <input matInput formControlName="loadHeight">
                 </mat-form-field>
               </div>
+            </div>
+
+            <div>
+              <mat-label style="font-size: large;" class="d-block mb-1">Макс. вага, кг.</mat-label>
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <input matInput formControlName="loadCapacity">
+              </mat-form-field>
             </div>
 
             <button tabindex="4" type="submit" (click)="submit()" [disabled]="createTransportForm.invalid" mat-flat-button

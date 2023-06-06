@@ -4,6 +4,7 @@ export interface TransportRequest {
   type: string;
   code: string;
   loadCapacity: number;
+  loadLength: number;
   loadHeight: number;
   loadWidth: number;
 }

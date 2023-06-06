@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
-const CLIENT_API = "http://localhost:8080/api/v1/client"
+const CLIENT_API = "http://localhost:8080/api/v1/client";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,6 @@ export class ClientAccountService {
   }
 
   topUpBalance(amount: number): Observable<any> {
-    return this.http.put(CLIENT_API + "/balance?amount=" + amount, {});
+    return this.http.put(CLIENT_API + "/balance/up?amount=" + amount, {});
   }
 }

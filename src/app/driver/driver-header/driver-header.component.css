@@ -2,3 +2,11 @@
   font-weight: normal;
   font-size: large;
 }
+.toolbar-fullhd {
+  min-height: 72px;
+}
+@media only screen and (max-width: 1600px) {
+  .toolbar-mobile {
+    min-height: 400px;
+  }
+}

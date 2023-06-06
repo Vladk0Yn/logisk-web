@@ -42,16 +42,23 @@ export class ClientOrderDetailsComponent implements OnInit {
     this.orderForm = this.formBuilder.group({
         name: [this.order.name, Validators.required],
         weight: [this.order.weight, Validators.required],
+        length: [this.order.length, Validators.required],
         width: [this.order.width, Validators.required],
         height: [this.order.height, Validators.required],
         type: [this.order.type, Validators.required],
         deliveryPrice: [this.order.deliveryPrice, Validators.required],
-        createdTime: [new Date(this.order.createdTime).toISOString().slice(0, 16), Validators.required],
-        deliverDueTime: [new Date(this.order.deliverDueTime).toISOString().slice(0, 16), Validators.required],
+        createdTime: [this.getDate(this.order.createdTime), Validators.required],
+        deliverDueTime: [this.getDate(this.order.deliverDueTime), Validators.required],
         locationToId: [this.order.locationTo.id, Validators.required],
         locationFromId: [this.order.locationFrom.id, Validators.required]
       }
     );
+  }
+
+  getDate(dateNum: number): string {
+    const date = new Date(dateNum);
+    date.setHours(date.getHours() + 3);
+    return date.toISOString().slice(0, 16);
   }
 
   setupOrderDriver(): void {
@@ -68,6 +75,7 @@ export class ClientOrderDetailsComponent implements OnInit {
     this.orderService.getOrder(id).subscribe({
       next: (data) => {
         this.order = <OrderResponse>JSON.parse(JSON.stringify(data));
+        this.selectedLocationFromId = this.order.locationFrom.id;
         if (this.order.driverId != null) {
           this.setupOrderDriver();
         }
@@ -95,7 +103,10 @@ export class ClientOrderDetailsComponent implements OnInit {
   }
 
   disableSelectedLocation(selectedLocationId: number) {
-    this.selectedLocationFromId = selectedLocationId;
+    if (selectedLocationId === this.orderForm.value.locationFromId) {
+      this.orderForm.get('locationToId').setValue(null);
+      this.selectedLocationFromId = selectedLocationId;
+    }
   }
 
   putOrder() {
@@ -103,6 +114,7 @@ export class ClientOrderDetailsComponent implements OnInit {
       id: this.order.id,
       name: this.orderForm.value.name,
       weight: this.orderForm.value.weight,
+      length: this.orderForm.value.length,
       width: this.orderForm.value.width,
       height: this.orderForm.value.height,
       type: this.orderForm.value.type,

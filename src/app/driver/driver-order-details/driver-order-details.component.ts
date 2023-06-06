@@ -42,9 +42,10 @@ export class DriverOrderDetailsComponent implements OnInit {
       }
     });
   }
-
-  getDateFromNumber(date: number): string {
-    return new Date(date).toISOString().slice(0, 16);
+  getDateFromNumber(dateNum: number): string {
+    const date = new Date(dateNum);
+    date.setHours(date.getHours() + 3);
+    return date.toISOString().slice(0, 16);
   }
 
   getOrderTypeLocale(type: string): string {

@@ -10,23 +10,23 @@
                 {{order.name}}
               </div>
               <div *ngIf="order.status === 'CREATED'" class="p-1"
-                   style="background: #F8F3D4; border-radius: 4px; font-size: small; font-weight: lighter">
+                   style="white-space: nowrap; background: #F8F3D4; border-radius: 4px; font-size: small; font-weight: lighter">
                 Створено
               </div>
               <div *ngIf="order.status === 'ACCEPTED'" class="p-1"
-                   style="background: #FFDE7D; border-radius: 4px; font-size: small; font-weight: lighter">
+                   style="white-space: nowrap; background: #FFDE7D; border-radius: 4px; font-size: small; font-weight: lighter">
                 Прийнято
               </div>
               <div *ngIf="order.status === 'DELIVERING'" class="p-1"
-                   style="background: #62C3A4; border-radius: 4px; font-size: small; font-weight: lighter">
+                   style="white-space: nowrap; background: #62C3A4; border-radius: 4px; font-size: small; font-weight: lighter">
                 В дорозі
               </div>
               <div *ngIf="order.status === 'FINISHED'" class="p-1"
-                   style="background: #5A98D1; border-radius: 4px; font-size: small; font-weight: lighter">
+                   style="white-space: nowrap; background: #5A98D1; border-radius: 4px; font-size: small; font-weight: lighter">
                 Доставлено
               </div>
               <div *ngIf="order.status === 'CANCELED'" class="p-1"
-                   style="background: #E07272; border-radius: 4px; font-size: small; font-weight: lighter">
+                   style="white-space: nowrap; background: #E07272; border-radius: 4px; font-size: small; font-weight: lighter">
                 Скасовано
               </div>
             </div>
@@ -47,10 +47,10 @@
               Тип: Інше
             </div>
             <hr>
-            <div>
+            <div class="single-line">
               Від: {{order.locationFrom.name}}
             </div>
-            <div>
+            <div class="single-line">
               До: {{order.locationTo.name}}
             </div>
             <hr>

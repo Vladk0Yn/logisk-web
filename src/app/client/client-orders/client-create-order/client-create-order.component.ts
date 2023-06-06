@@ -32,6 +32,7 @@ export class ClientCreateOrderComponent implements OnInit {
         name: ['', Validators.required],
         weight: ['', Validators.required],
         width: ['', Validators.required],
+        length: ['', Validators.required],
         height: ['', Validators.required],
         type: ['', Validators.required],
         deliveryPrice: ['', Validators.required],
@@ -53,14 +54,17 @@ export class ClientCreateOrderComponent implements OnInit {
   }
 
   disableSelectedLocation(selectedLocationId: number) {
-    this.selectedLocationFromId = selectedLocationId;
+    if (selectedLocationId === this.orderForm.value.locationFromId) {
+      this.orderForm.get('locationToId').setValue(null);
+      this.selectedLocationFromId = selectedLocationId;
+    }
   }
-
   createOrder() {
     this.ordersService.createOrder({
       id: 0,
       name: this.orderForm.value.name,
       weight: this.orderForm.value.weight,
+      length: this.orderForm.value.length,
       width: this.orderForm.value.width,
       height: this.orderForm.value.height,
       type: this.orderForm.value.type,

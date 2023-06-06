@@ -14,18 +14,16 @@
         <div style="display: flex; justify-content: space-between">
           <div style="flex: 0 0 32%; max-width: 32%;">
             <mat-form-field appearance="fill" style="width: 100%;">
-              <mat-label>Вага, г.</mat-label>
-              <input readonly matInput [value]="order.weight.toString()">
+              <mat-label>Довжина, см.</mat-label>
+              <input readonly matInput [value]="order.length.toString()">
             </mat-form-field>
           </div>
-
           <div style="flex: 0 0 32%; max-width: 32%;">
             <mat-form-field appearance="fill" style="width: 100%;">
               <mat-label>Ширина, см.</mat-label>
               <input readonly matInput [value]="order.width.toString()">
             </mat-form-field>
           </div>
-
           <div style="flex: 0 0 32%; max-width: 32%;">
             <mat-form-field appearance="fill" style="width: 100%;">
               <mat-label>Висота, см.</mat-label>
@@ -33,17 +31,25 @@
             </mat-form-field>
           </div>
         </div>
-        <div>
-          <mat-form-field style="width: 100%;" appearance="fill">
-            <mat-label>Тип вантажу</mat-label>
-            <input readonly matInput [value]="getOrderTypeLocale(order.type)">
-          </mat-form-field>
+        <div style="display: flex; justify-content: space-between">
+          <div style="flex: 0 0 49%; max-width: 49%;">
+            <mat-form-field appearance="fill" style="width: 100%;">
+              <mat-label>Вага, кг.</mat-label>
+              <input readonly matInput [value]="order.weight.toString()">
+            </mat-form-field>
+          </div>
+          <div style="flex: 0 0 49%; max-width: 49%;">
+            <mat-form-field style="width: 100%;" appearance="fill">
+              <mat-label>Тип вантажу</mat-label>
+              <input readonly matInput [value]="getOrderTypeLocale(order.type)">
+            </mat-form-field>
+          </div>
         </div>
 
         <h2>Час створення та срок доставки:</h2>
         <div style="display: flex; justify-content: space-between">
           <div style="flex: 0 0 49%; max-width: 49%;">
-            <mat-form-field appearance="fill" style="overflow: visible; width: 100%;" >
+            <mat-form-field appearance="fill" style="overflow: visible; width: 100%;">
               <mat-label>Остання зміна:</mat-label>
               <input readonly style="overflow: visible;" matInput type="datetime-local"
                      [value]="getDateFromNumber(order.createdTime)">
@@ -59,54 +65,54 @@
         </div>
 
         <h2>Місце відправки та прибуття:</h2>
-          <div>
-            <mat-form-field style="width: 100%;" appearance="fill">
-              <mat-label>Доставити з</mat-label>
-              <input readonly style="overflow: visible;" matInput [value]="order.locationFrom.address">
-            </mat-form-field>
-          </div>
-
-          <div>
-            <mat-form-field style="width: 100%;" appearance="fill">
-              <mat-label>Доставити до</mat-label>
-              <input readonly style="overflow: visible;" matInput [value]="order.locationTo.address">
-            </mat-form-field>
-          </div>
-        </div>
-
-        <h2>Оплата:</h2>
         <div>
           <mat-form-field style="width: 100%;" appearance="fill">
-            <mat-label>Оплата за доставку</mat-label>
-            <input readonly matInput [value]="order.deliveryPrice.toString()">
+            <mat-label>Доставити з</mat-label>
+            <input readonly style="overflow: visible;" matInput [value]="order.locationFrom.address">
           </mat-form-field>
         </div>
 
-        <div *ngIf="client">
-          <h2>Деталі про клієнта:</h2>
-          <div>
+        <div>
+          <mat-form-field style="width: 100%;" appearance="fill">
+            <mat-label>Доставити до</mat-label>
+            <input readonly style="overflow: visible;" matInput [value]="order.locationTo.address">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <h2>Оплата:</h2>
+      <div>
+        <mat-form-field style="width: 100%;" appearance="fill">
+          <mat-label>Оплата за доставку</mat-label>
+          <input readonly matInput [value]="order.deliveryPrice.toString()">
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="client">
+        <h2>Деталі про клієнта:</h2>
+        <div>
+          <mat-form-field style="width: 100%;" appearance="fill">
+            <mat-label>Ім'я водія</mat-label>
+            <input readonly matInput [value]="client.name">
+          </mat-form-field>
+        </div>
+        <div style="display: flex; justify-content: space-between">
+          <div style="flex: 0 0 39%; max-width: 39%;">
             <mat-form-field style="width: 100%;" appearance="fill">
-              <mat-label>Ім'я водія</mat-label>
-              <input readonly matInput [value]="client.name">
+              <mat-label>Номер телефону:</mat-label>
+              <input readonly matInput [value]="client.phoneNumber">
             </mat-form-field>
           </div>
-          <div style="display: flex; justify-content: space-between">
-            <div style="flex: 0 0 39%; max-width: 39%;">
-              <mat-form-field style="width: 100%;" appearance="fill">
-                <mat-label>Номер телефону:</mat-label>
-                <input readonly matInput [value]="client.phoneNumber">
-              </mat-form-field>
-            </div>
-            <div style="flex: 0 0 59%; max-width: 59%;">
-              <mat-form-field style="width: 100%;" appearance="fill">
-                <mat-label>Електронна пошта:</mat-label>
-                <input readonly matInput [value]="client.email">
-              </mat-form-field>
-            </div>
-          </div>
-          <div>
+          <div style="flex: 0 0 59%; max-width: 59%;">
+            <mat-form-field style="width: 100%;" appearance="fill">
+              <mat-label>Електронна пошта:</mat-label>
+              <input readonly matInput [value]="client.email">
+            </mat-form-field>
           </div>
         </div>
+        <div>
+        </div>
+      </div>
       <div style="display: flex; justify-content: right;">
         <div>
           <button mat-raised-button color="accent" (click)="closeWindow()">

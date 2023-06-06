@@ -51,7 +51,7 @@ export class RegistrationComponent {
         this.notificationService.showSnackBar("Вітаємо, " + this.user.name);
         if (this.user != null) {
           this.userStorageService.saveToken(btoa(request.email + ':' + request.password));
-          switch (this.user.role) {
+          switch (this.user.role.toUpperCase()) {
             case "CLIENT": {
               this.router.navigate(['client/locations']);
               break;

@@ -35,6 +35,7 @@ export class DriverTransportComponent implements OnInit {
           type: [this.transport.type, Validators.required],
           code: [this.transport.code, Validators.required],
           loadCapacity: [this.transport.loadCapacity, Validators.required],
+          loadLength: [this.transport.loadLength, Validators.required],
           loadHeight: [this.transport.loadHeight, Validators.required],
           loadWidth: [this.transport.loadWidth, Validators.required]
         });
@@ -51,6 +52,7 @@ export class DriverTransportComponent implements OnInit {
       type: this.editTransportForm.value.type,
       code: this.editTransportForm.value.code,
       loadCapacity: this.editTransportForm.value.loadCapacity,
+      loadLength: this.editTransportForm.value.loadLength,
       loadHeight: this.editTransportForm.value.loadHeight,
       loadWidth: this.editTransportForm.value.loadWidth
     }).subscribe({

@@ -5,28 +5,32 @@
         <mat-card-content>
           <h1 style="font-weight: bolder; font-size: xx-large;">Ласкаво просимо в Logisk</h1>
           <br>
-          <form [formGroup]="loginForm">
+          <div (keyup.enter)="submit()">
+            <form [formGroup]="loginForm">
 
-            <mat-label style="font-size: large;" class="mb-1 d-block">Логін (email)
-            </mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput tabindex="1" placeholder="example@example.com" [email]="true" formControlName="login"/>
-            </mat-form-field>
+              <mat-label style="font-size: large;" class="mb-1 d-block">Логін (email)
+              </mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input matInput tabindex="1" placeholder="example@example.com" [email]="true" formControlName="login"/>
+              </mat-form-field>
 
-            <mat-label style="font-size: large;" class="mb-1 d-block">Пароль
-            </mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput tabindex="2" [type]="hide ? 'password' : 'text'" formControlName="password"/>
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                      [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-label style="font-size: large;" class="mb-1 d-block">Пароль
+              </mat-label>
+              <mat-form-field appearance="outline" class="w-100" color="primary">
+                <input placeholder="Введіть пароль" matInput tabindex="2" [type]="hide ? 'password' : 'text'" (keydown.enter)="$event.preventDefault()" formControlName="password"/>
+                <button mat-icon-button matSuffix tabindex="4" (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+
+              <button tabindex="3" type="submit" (click)="submit()" [disabled]="loginForm.invalid" mat-flat-button
+                      color="primary" class="w-100" style="font-size: large; height: 48px;">
+                <mat-icon>person</mat-icon>
+                Увійти
               </button>
-            </mat-form-field>
-
-            <button tabindex="3" type="submit" (click)="submit()" [disabled]="loginForm.invalid" mat-flat-button
-                    color="primary" class="w-100" style="font-size: large; height: 48px;">Увійти
-            </button>
-          </form>
+            </form>
+          </div>
           <span class="d-block mt-3 f-w-500 m-t-24">
             Вперше в Logisk?
             <a [routerLink]="['/registration']" style="color: #009688; font-size: medium">Створити аккаунт</a>

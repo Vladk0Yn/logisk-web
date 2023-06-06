@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Введіть суму поповнення</h1>
+<h1 mat-dialog-title>Введіть суму зняття</h1>
 <div mat-dialog-content>
   <mat-form-field style="width: 100%" appearance="outline">
     <input placeholder="Введіть суму" matInput [(ngModel)]="amount">
@@ -11,9 +11,9 @@
       Закрити
     </button>
     <button style="margin-left: 10px" [disabled]="amount === null" mat-raised-button color="primary"
-            (click)="topUp()">
+            (click)="withdraw()">
       <mat-icon>done</mat-icon>
-      Поповнити
+      Зняти
     </button>
   </div>
 </div>

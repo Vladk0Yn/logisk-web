@@ -27,10 +27,14 @@ export class DriverOrdersService {
   }
 
   getOrderClient(id: number): Observable<any> {
-    return this.http.get(DRIVER_ORDER_API + "/" + id + "/client")
+    return this.http.get(DRIVER_ORDER_API + "/" + id + "/client");
   }
 
   setOrderStatus(id: number, status: string): Observable<any> {
     return this.http.put(DRIVER_ORDER_API + "/" + id + "/status?status=" + status, {});
+  }
+
+  removeOrder(id: number): Observable<any> {
+    return this.http.delete(DRIVER_ORDER_API + "/" + id + "/remove");
   }
 }

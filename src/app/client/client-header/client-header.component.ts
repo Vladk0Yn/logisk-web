@@ -25,7 +25,6 @@ export class ClientHeaderComponent implements OnInit {
     if (userStorageService.getUser().role === 'DRIVER') {
       userStorageService.logOut();
     }
-
   }
 
   ngOnInit(): void {
